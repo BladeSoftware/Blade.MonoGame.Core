@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Blade.MG.Core.Primitives
+namespace Blade.MG.Core
 {
     public class RectangleF
     {
@@ -40,7 +40,7 @@ namespace Blade.MG.Core.Primitives
             int minY = (int)Math.Floor(MinY);
             int maxY = (int)Math.Floor(MaxY);
 
-            return new Rectangle(minX, minY, (maxX - minX + 1), (maxY - minY + 1));
+            return new Rectangle(minX, minY, maxX - minX + 1, maxY - minY + 1);
         }
     }
 

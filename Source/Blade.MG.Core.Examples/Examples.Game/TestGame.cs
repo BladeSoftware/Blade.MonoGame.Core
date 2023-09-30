@@ -14,6 +14,9 @@ namespace Examples
     {
         private GraphicsDeviceManager graphicsDeviceManager;
         private Texture2D testTexture;
+        private bool bounded = false;
+        private bool rounded = false;
+        private bool showConstructorLines = true;
 
         public TestGame()
         {
@@ -105,6 +108,9 @@ namespace Examples
                 return;
             }
 
+            if (InputManager.KeyPressed(Keys.Q)) bounded = !bounded;
+            if (InputManager.KeyPressed(Keys.W)) rounded = !rounded;
+            if (InputManager.KeyPressed(Keys.E)) showConstructorLines = !showConstructorLines;
         }
 
 
@@ -127,7 +133,7 @@ namespace Examples
             {
                 try
                 {
-                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.LinearWrap, DepthStencilState.Default, null, null, null);
+                    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.Default, null, null, null);
 
 
                     Primitives2D.DrawLine(spriteBatch, 0, 0, view.Width, view.Height, Color.Yellow, 3);
@@ -136,13 +142,29 @@ namespace Examples
                     int w = 250;
                     int h = 250;
 
-                    //Primitives2D.DrawRect(spriteBatch, new Rectangle(0, 0, w, h), Color.Orange, 1);
-                    //Primitives2D.DrawPixel(spriteBatch, center.X, center.Y, Color.Orange, 1);
-
-                    Primitives2D.DrawRect(spriteBatch, new Rectangle(center.X - w / 2, center.Y - h / 2, w, h), Color.Orange, 7);
-                    Primitives2D.DrawRect(spriteBatch, new Rectangle(center.X - w / 2, center.Y - h / 2, w, h), Color.Green, 1);
                     Primitives2D.DrawPixel(spriteBatch, center.X, center.Y, Color.Orange, 1);
 
+                    if (rounded)
+                    {
+                        Primitives2D.DrawRoundedRect(spriteBatch, new Rectangle(center.X - w / 2, center.Y - h / 2, w, h), 12, Color.Purple, 20, bounded);
+                    }
+                    else
+                    {
+                        Primitives2D.DrawRect(spriteBatch, new Rectangle(center.X - w / 2, center.Y - h / 2, w, h), Color.Purple, 20, bounded);
+                    }
+
+                    if (showConstructorLines)
+                    {
+                        Primitives2D.DrawRect(spriteBatch, new Rectangle(center.X - w / 2, center.Y - h / 2, w, h), Color.Yellow, 1);
+                    }
+
+
+                    Primitives2D.DrawCircle(spriteBatch, center.ToVector2(), 250f, Color.Green, 25, bounded);
+
+                    if (showConstructorLines)
+                    {
+                        Primitives2D.DrawCircle(spriteBatch, center.ToVector2(), 250f, Color.Yellow, 1);
+                    }
 
                 }
                 finally

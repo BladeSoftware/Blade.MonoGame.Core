@@ -1,10 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Blade.MG.Core.Primitives
 {
@@ -293,13 +288,13 @@ namespace Blade.MG.Core.Primitives
             if (len0 != 0)
             {
                 //p1 = (p02 + p11) / 2f;
-                if (get_line_intersection(p01.X, p01.Y, p02.X, p02.Y, p11.X, p11.Y, p12.X, p12.Y, ref ix, ref iy))
+                if (GetLineIntersection(p01.X, p01.Y, p02.X, p02.Y, p11.X, p11.Y, p12.X, p12.Y, ref ix, ref iy))
                 {
                     p1 = new Vector2(ix, iy);
                 }
 
                 //p4 = (p03 + p14) / 2f;
-                if (get_line_intersection(p04.X, p04.Y, p03.X, p03.Y, p13.X, p13.Y, p14.X, p14.Y, ref ix, ref iy))
+                if (GetLineIntersection(p04.X, p04.Y, p03.X, p03.Y, p13.X, p13.Y, p14.X, p14.Y, ref ix, ref iy))
                 {
                     p4 = new Vector2(ix, iy);
                 }
@@ -309,13 +304,13 @@ namespace Blade.MG.Core.Primitives
             if (len2 != 0)
             {
                 //    p2 = (p12 + p21) / 2f;
-                if (get_line_intersection(p21.X, p21.Y, p22.X, p22.Y, p11.X, p11.Y, p12.X, p12.Y, ref ix, ref iy))
+                if (GetLineIntersection(p21.X, p21.Y, p22.X, p22.Y, p11.X, p11.Y, p12.X, p12.Y, ref ix, ref iy))
                 {
                     p2 = new Vector2(ix, iy);
                 }
 
                 //    p3 = (p13 + p24) / 2f;
-                if (get_line_intersection(p24.X, p24.Y, p23.X, p23.Y, p13.X, p13.Y, p14.X, p14.Y, ref ix, ref iy))
+                if (GetLineIntersection(p24.X, p24.Y, p23.X, p23.Y, p13.X, p13.Y, p14.X, p14.Y, ref ix, ref iy))
                 {
                     p3 = new Vector2(ix, iy);
                 }

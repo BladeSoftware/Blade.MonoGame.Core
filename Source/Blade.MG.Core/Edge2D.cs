@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Blade.MG.Core.Primitives
+namespace Blade.MG.Core
 {
     public class Edge2D
     {
@@ -53,7 +53,7 @@ namespace Blade.MG.Core.Primitives
             int p1y = (int)P1.Y;
             int p2y = (int)P2.Y;
 
-            isHorizontal = (p1y == p2y);
+            isHorizontal = p1y == p2y;
 
             // isPixel = isHorizontal && p1x==p2x;
         }
