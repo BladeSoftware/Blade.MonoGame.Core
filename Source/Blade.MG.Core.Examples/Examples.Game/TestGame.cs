@@ -1,5 +1,5 @@
-﻿using Blade.MG.Core.Input;
-using Blade.MG.Core.Primitives;
+﻿using Blade.MG.Input;
+using Blade.MG.Primitives;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

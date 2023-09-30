@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System.Collections.Concurrent;
 
-namespace Blade.MG.Core.Input.Keyboards
+namespace Blade.MG.Input.Keyboards
 {
     public class KeyboardFrench : KeyboardBase
     {

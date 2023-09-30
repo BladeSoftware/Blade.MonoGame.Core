@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Blade.MG.Core
+namespace Blade.MG
 {
     public class RectangleF
     {

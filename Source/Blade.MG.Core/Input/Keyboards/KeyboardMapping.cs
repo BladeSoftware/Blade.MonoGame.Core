@@ -1,4 +1,4 @@
-﻿namespace Blade.MG.Core.Input.Keyboards
+﻿namespace Blade.MG.Input.Keyboards
 {
     public class KeyboardMapping
     {

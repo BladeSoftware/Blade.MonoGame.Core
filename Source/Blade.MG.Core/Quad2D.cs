@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Blade.MG.Core
+namespace Blade.MG
 {
     public struct Quad2D
     {

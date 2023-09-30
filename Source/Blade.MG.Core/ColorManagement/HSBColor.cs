@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 
 
-namespace Blade.MG.Core.ColorManagement
+namespace Blade.MG.ColorManagement
 {
     // Based on code from:
     // https://github.com/ZedGraph/ZedGraph/blob/f7160203e2c400020046c97f61a01f470edcb4ce/source/ZedGraph/HSBColor.cs

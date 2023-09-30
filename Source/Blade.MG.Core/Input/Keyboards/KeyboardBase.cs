@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace Blade.MG.Core.Input.Keyboards
+namespace Blade.MG.Input.Keyboards
 {
     public abstract class KeyboardBase
     {

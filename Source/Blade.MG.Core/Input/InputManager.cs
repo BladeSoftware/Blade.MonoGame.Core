@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Blade.MG.Core.Input
+namespace Blade.MG.Input
 {
 
     public class InputManager

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Blade.MG.Core.Primitives
+namespace Blade.MG.Primitives
 {
     public static partial class Primitives2D
     {
