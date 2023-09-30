@@ -1,0 +1,32 @@
+﻿{
+  "Grid" : {
+    "Name": "grid1",
+    "Columns": [
+      {
+        "UnitType": "*",
+        "Width": 1
+      },
+      {
+        "UnitType": "*",
+        "Width": 1
+      },
+      {
+        "UnitType": "*",
+        "Width": 4
+      }
+    ],
+    "Rows": [
+      {
+        "UnitType": "px",
+        "Height": 20
+      },
+      {
+        "UnitType": "Auto"
+      },
+      {
+        "UnitType": "*",
+        "Height": 4
+      }
+    ]
+  }
+}
