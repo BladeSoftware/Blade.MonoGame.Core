@@ -4,7 +4,32 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
     <RootNamespace>Blade.MG</RootNamespace>
+    
+    <PackageId>BladeSoftware.MonoGame.Core</PackageId>
+    <Title>MonoGame Helper Library</Title>
+    <PackageVersion>1.0.1-alpha</PackageVersion>
+    <Company>Blade Software</Company>
+    <Description>MonoGame Helper Library used by the BladeSoftware.MonoGame.* packages</Description>
+    <Copyright>Copyright (c) Blade Software 2023</Copyright>
+    <RepositoryUrl>https://github.com/BladeSoftware/Blade.MonoGame.Core</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Blade Software; MonoGame</PackageTags>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Authors>Blade Software</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" ExcludeAssets="runtime" />
