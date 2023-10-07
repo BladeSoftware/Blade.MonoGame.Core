@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Input;
 namespace Blade.MG.Input
 {
 
-    public class InputManager
+    public static class InputManager
     {
-        public static InputManager Instance { get; } = new InputManager();
+        //public static InputManager Instance { get; } = new InputManager();
 
         public static KeyboardState KeyboardState;
         public static KeyboardState LastKeyboardState;
@@ -20,12 +20,12 @@ namespace Blade.MG.Input
         public static GamePadState GamePadStatePlayer2;
         public static GamePadState LastGamePadStatePlayer2;
 
-        private InputManager()
-        {
+        //private InputManager()
+        //{
 
-        }
+        //}
 
-        public void Update()
+        public static void Update()
         {
             // Handle Keyboard Input
             LastKeyboardState = KeyboardState;
