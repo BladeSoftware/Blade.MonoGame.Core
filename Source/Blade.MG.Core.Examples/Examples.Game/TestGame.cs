@@ -97,7 +97,7 @@ namespace Examples
         {
             base.Update(gameTime);
 
-            InputManager.Instance.Update();
+            InputManager.Update();
 
             // Check Input
             if (InputManager.KeyboardState.IsKeyDown(Keys.Escape))
