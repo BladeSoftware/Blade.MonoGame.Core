@@ -148,7 +148,7 @@ namespace Blade.MG.Primitives
         /// <param name="depth"></param>
         /// <param name="dimensions"></param>
         /// <param name="measureOnly"></param>
-        public static void DrawSmoothLine(SpriteBatch spriteBatch, Vector2 lp0, Vector2 lp1, Vector2 lp2, Vector2 lp3, Color color, float lineWidth, float depth = 0, RectangleF dimensions = null, bool measureOnly = false)
+        public static void DrawSmoothLine(SpriteBatch spriteBatch, Vector2 lp0, Vector2 lp1, Vector2 lp2, Vector2 lp3, Color color, float lineWidth, float depth, ref RectangleF dimensions, bool measureOnly = false)
         {
             if (lineWidth == 0)
             {
@@ -179,16 +179,13 @@ namespace Blade.MG.Primitives
 
             if (len1 == 0)
             {
-                // Draw a Pixel
-                if (dimensions != null)
-                {
-                    // Measure
-                    dimensions.Union(lp1);
-                }
+
+                // Measure
+                dimensions.Union(lp1);
 
                 if (!measureOnly)
                 {
-                    // Draw
+                    // Draw a Pixel
                     Primitives2D.DrawPixel(spriteBatch, lp1.X, lp1.Y, color);
                 }
 
@@ -376,12 +373,9 @@ namespace Blade.MG.Primitives
 
                 if (minX != float.MaxValue)
                 {
-                    if (dimensions != null)
-                    {
-                        // Measure
-                        dimensions.Union(minX, y);
-                        dimensions.Union(maxX, y);
-                    }
+                    // Measure
+                    dimensions.Union(minX, y);
+                    dimensions.Union(maxX, y);
 
                     if (!measureOnly)
                     {

@@ -101,9 +101,34 @@ namespace Blade.MG
             return radius;
         }
 
-        public void RenderQuad(GraphicsDevice graphicsDevice, Matrix world, Matrix view, Matrix projection)
+        public Rectangle GetAABB()
         {
-            throw new NotImplementedException();
+            float minX = TL.X;
+            minX = Math.Min(minX, TR.X);
+            minX = Math.Min(minX, BR.X);
+            minX = Math.Min(minX, BL.X);
+
+            float maxX = TL.X;
+            maxX = Math.Max(maxX, TR.X);
+            maxX = Math.Max(maxX, BR.X);
+            maxX = Math.Max(maxX, BL.X);
+
+            float minY = TL.Y;
+            minY = Math.Min(minY, TR.Y);
+            minY = Math.Min(minY, BR.Y);
+            minY = Math.Min(minY, BL.Y);
+
+            float maxY = TL.Y;
+            maxY = Math.Max(maxY, TR.Y);
+            maxY = Math.Max(maxY, BR.Y);
+            maxY = Math.Max(maxY, BL.Y);
+
+            return new Rectangle((int)minX, (int)minY, (int)(maxX - minX), (int)(maxY - minY));
         }
+
+        //public void RenderQuad(GraphicsDevice graphicsDevice, Matrix world, Matrix view, Matrix projection)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

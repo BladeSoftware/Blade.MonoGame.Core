@@ -2,7 +2,7 @@
 
 namespace Blade.MG
 {
-    public class RectangleF
+    public struct RectangleF
     {
         public float MinX;
         public float MaxX;
