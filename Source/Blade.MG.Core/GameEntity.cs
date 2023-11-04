@@ -46,7 +46,6 @@ namespace Blade.MG
 
         public virtual void Dispose()
         {
-
         }
 
         //public abstract void Initialize(Game game);

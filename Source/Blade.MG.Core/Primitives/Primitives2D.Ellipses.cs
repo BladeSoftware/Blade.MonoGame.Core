@@ -28,7 +28,7 @@ namespace Blade.MG.Primitives
 
         public static void DrawEllipseFast(SpriteBatch spriteBatch, float x, float y, float radiusX, float radiusY, Color color)
         {
-            spriteBatch.Draw(CircleTexture(spriteBatch), new Vector2(x, y), null, color, 0f, new Vector2(50, 50), new Vector2(radiusX / 50f, radiusY / 50f), SpriteEffects.None, 0f);
+            spriteBatch.Draw(CircleTexture(spriteBatch.GraphicsDevice), new Vector2(x, y), null, color, 0f, new Vector2(50, 50), new Vector2(radiusX / 50f, radiusY / 50f), SpriteEffects.None, 0f);
         }
         #endregion
 

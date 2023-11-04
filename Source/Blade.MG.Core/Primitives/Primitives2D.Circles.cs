@@ -18,7 +18,7 @@ namespace Blade.MG.Primitives
 
         public static void DrawCircleFast(SpriteBatch spriteBatch, float x, float y, float radius, Color color)
         {
-            spriteBatch.Draw(CircleTexture(spriteBatch), new Vector2(x, y), null, color, 0f, new Vector2(50, 50), radius / 50f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(CircleTexture(spriteBatch.GraphicsDevice), new Vector2(x, y), null, color, 0f, new Vector2(50, 50), radius / 50f, SpriteEffects.None, 0f);
         }
 
 
@@ -34,7 +34,7 @@ namespace Blade.MG.Primitives
 
         public static void FillCircleFast(SpriteBatch spriteBatch, float x, float y, float radius, Color color)
         {
-            spriteBatch.Draw(FilledCircleTexture(spriteBatch), new Vector2(x, y), null, color, 0f, new Vector2(50, 50), radius / 50f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(FilledCircleTexture(spriteBatch.GraphicsDevice), new Vector2(x, y), null, color, 0f, new Vector2(50, 50), radius / 50f, SpriteEffects.None, 0f);
         }
 
         #endregion

@@ -1,23 +1,41 @@
-﻿namespace Microsoft.Xna.Framework
+﻿using System.Runtime.CompilerServices;
+
+namespace Microsoft.Xna.Framework
 {
     public static class MatrixEx
     {
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix CreateRotationZ(float radians, Vector3 center)
         {
             return Matrix.Multiply(Matrix.Multiply(Matrix.CreateTranslation(-center), Matrix.CreateRotationZ(radians)), Matrix.CreateTranslation(center));
         }
 
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 GetPosition(this Matrix m)
         {
             return new Vector3(m.M41, m.M42, m.M43);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 GetScale(this Matrix m)
         {
             return new Vector3(m.M11 + m.M21 + m.M31, m.M12 + m.M22 + m.M32, m.M13 + m.M23 + m.M33);
         }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 GetPosition2D(this Matrix m)
+        {
+            return new Vector2(m.M41, m.M42);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 GetTranslation2D(this Matrix m)
+        {
+            return new Vector2(m.M41, m.M42);
+        }
+
 
         /// <summary>
         /// Given two sets of co-ordinate axis e(e1,e2,e3) & f(f1,f2,f3)
