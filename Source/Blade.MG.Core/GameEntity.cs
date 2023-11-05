@@ -52,6 +52,10 @@ namespace Blade.MG
         public abstract void LoadContent();
         public abstract void Update(GameTime gameTime);
 
+        public virtual void PreDraw(GraphicsDevice graphicsDevice, GameTime gameTime)
+        {
+        }
+
         public abstract void Draw(SpriteBatch spriteBatch, GameTime gameTime);
 
         //public virtual void OnCollison(GameEntity gameEntity, CollisionResult2D collisionResult)
