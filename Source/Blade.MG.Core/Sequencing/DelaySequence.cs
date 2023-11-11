@@ -5,7 +5,7 @@ namespace Blade.MG.Sequencing
     /// <summary>
     /// Delay for the required time before calling the action
     /// </summary>
-    public class SequenceDelay : SequenceBase
+    public class DelaySequence : SequenceBase
     {
         public DateTime SequenceStart;
         public DateTime ActionEnd;
@@ -17,7 +17,7 @@ namespace Blade.MG.Sequencing
         public object data { get; set; }
         public bool ActionExecuted { get; set; }
 
-        public SequenceDelay(TimeSpan delay, Action<object> action, Object data = null) : base()
+        public DelaySequence(TimeSpan delay, Action<object> action, Object data = null) : base()
         {
             SequenceStart = DateTime.Now;
             ActionEnd = DateTime.Now + delay;
