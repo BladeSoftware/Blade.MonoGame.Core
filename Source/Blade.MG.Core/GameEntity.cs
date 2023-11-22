@@ -8,7 +8,7 @@ namespace Blade.MG
     public abstract class GameEntity : IDisposable
     {
         protected Game game;
-        protected GraphicsDevice graphicsDevice => game.GraphicsDevice;
+        protected virtual GraphicsDevice graphicsDevice => game.GraphicsDevice;
         protected ContentManager Content => game?.Content;
 
         public HashSet<string> Tags = new HashSet<string>();
@@ -52,7 +52,7 @@ namespace Blade.MG
         public abstract void LoadContent();
         public abstract void Update(GameTime gameTime);
 
-        public virtual void PreDraw(GraphicsDevice graphicsDevice, GameTime gameTime)
+        public virtual void PreDraw(Game game, GameTime gameTime)
         {
         }
 

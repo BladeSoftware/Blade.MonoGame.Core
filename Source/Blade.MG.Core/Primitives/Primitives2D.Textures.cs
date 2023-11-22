@@ -29,7 +29,7 @@ namespace Blade.MG.Primitives
             // return Content.Load<Texture2D>("Images/circle");
             if (circleTexture == null)
             {
-                using (var newSpriteBatch = new SpriteBatch(graphicsDevice))
+                using var newSpriteBatch = new SpriteBatch(graphicsDevice);
                 {
                     var saveRenderTargets = graphicsDevice.GetRenderTargets();
 
@@ -106,7 +106,45 @@ namespace Blade.MG.Primitives
 
         public static RenderTarget2D NewRenderTarget(GraphicsDevice graphicsDevice, int width, int height, Color? clearColor = null)
         {
-            var texture = new RenderTarget2D(graphicsDevice, width, height);
+            // Look up the resolution and format of our main backbuffer.
+            PresentationParameters pp = graphicsDevice.PresentationParameters;
+
+            SurfaceFormat format = pp.BackBufferFormat;
+
+            // Create a texture for rendering the main scene, prior to applying bloom.
+            var texture = new RenderTarget2D(graphicsDevice, width, height, false,
+                                                   format, pp.DepthStencilFormat, pp.MultiSampleCount,
+                                                   RenderTargetUsage.DiscardContents);
+
+            //var texture = new RenderTarget2D(graphicsDevice, width, height);
+
+            if (clearColor != null)
+            {
+                var saveRenderTargets = graphicsDevice.GetRenderTargets();
+
+                graphicsDevice.SetRenderTarget(texture);
+                graphicsDevice.Clear(clearColor.Value);
+
+                graphicsDevice.SetRenderTargets(saveRenderTargets);
+            }
+
+            return texture;
+        }
+
+        public static Texture2D NewRenderTargetLike(GraphicsDevice graphicsDevice, Texture2D texture2D, Vector2? size, Color? clearColor = null)
+        {
+            return NewRenderTargetLike(graphicsDevice, texture2D, (int?)size?.X, (int?)size?.Y, clearColor);
+        }
+
+        public static RenderTarget2D NewRenderTargetLike(GraphicsDevice graphicsDevice, Texture2D texture2D, int? width = null, int? height = null, Color? clearColor = null)
+        {
+            // Look up the resolution and format of our main backbuffer.
+            PresentationParameters pp = graphicsDevice.PresentationParameters;
+
+            // Create a texture for rendering the main scene, prior to applying bloom.
+            var texture = new RenderTarget2D(graphicsDevice, width ?? texture2D.Width, height ?? texture2D.Height, false,
+                                                   texture2D.Format, DepthFormat.None, 0,
+                                                   RenderTargetUsage.DiscardContents);
 
             if (clearColor != null)
             {
