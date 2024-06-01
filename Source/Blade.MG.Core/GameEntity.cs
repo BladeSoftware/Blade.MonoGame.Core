@@ -52,7 +52,7 @@ namespace Blade.MG
         public abstract void LoadContent();
         public abstract void Update(GameTime gameTime);
 
-        public virtual void PreDraw(Game game, GameTime gameTime)
+        public virtual void BeforDraw(Game game, GameTime gameTime)
         {
         }
 

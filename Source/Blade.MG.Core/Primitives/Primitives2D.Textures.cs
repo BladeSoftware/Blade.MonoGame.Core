@@ -99,12 +99,12 @@ namespace Blade.MG.Primitives
         }
 
 
-        public static Texture2D NewRenderTarget(GraphicsDevice graphicsDevice, Vector2 size, Color? clearColor = null)
+        public static Texture2D NewRenderTarget(GraphicsDevice graphicsDevice, Vector2 size)
         {
-            return NewRenderTarget(graphicsDevice, (int)size.X, (int)size.Y, clearColor);
+            return NewRenderTarget(graphicsDevice, (int)size.X, (int)size.Y);
         }
 
-        public static RenderTarget2D NewRenderTarget(GraphicsDevice graphicsDevice, int width, int height, Color? clearColor = null)
+        public static RenderTarget2D NewRenderTarget(GraphicsDevice graphicsDevice, int width, int height)
         {
             // Look up the resolution and format of our main backbuffer.
             PresentationParameters pp = graphicsDevice.PresentationParameters;
@@ -118,15 +118,15 @@ namespace Blade.MG.Primitives
 
             //var texture = new RenderTarget2D(graphicsDevice, width, height);
 
-            if (clearColor != null)
-            {
-                var saveRenderTargets = graphicsDevice.GetRenderTargets();
+            //if (clearColor != null)
+            //{
+            //    var saveRenderTargets = graphicsDevice.GetRenderTargets();
 
-                graphicsDevice.SetRenderTarget(texture);
-                graphicsDevice.Clear(clearColor.Value);
+            //    graphicsDevice.SetRenderTarget(texture);
+            //    graphicsDevice.Clear(clearColor.Value);
 
-                graphicsDevice.SetRenderTargets(saveRenderTargets);
-            }
+            //    graphicsDevice.SetRenderTargets(saveRenderTargets);
+            //}
 
             return texture;
         }
