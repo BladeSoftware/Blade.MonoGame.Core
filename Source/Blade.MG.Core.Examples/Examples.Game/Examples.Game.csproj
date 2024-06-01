@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <Reference Include="Blade.MG.Core">
-      <HintPath>..\..\Blade.MG.Core\bin\Debug\net7.0\Blade.MG.Core.dll</HintPath>
+      <HintPath>..\..\Blade.MG.Core\bin\Debug\net8.0\Blade.MG.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 

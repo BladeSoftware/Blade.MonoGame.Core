@@ -7,7 +7,7 @@
     
     <PackageId>BladeSoftware.MonoGame.Core</PackageId>
     <Title>MonoGame Helper Library</Title>
-    <PackageVersion>1.0.5-alpha</PackageVersion>
+    <PackageVersion>1.0.0</PackageVersion>
     <Company>Blade Software</Company>
     <Description>MonoGame Helper Library used by the BladeSoftware.MonoGame.* packages</Description>
     <Copyright>Copyright (c) Blade Software 2023</Copyright>
