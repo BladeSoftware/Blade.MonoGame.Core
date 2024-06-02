@@ -61,7 +61,7 @@ namespace Blade.MG.ColorManagement
 
         /// <summary>
         /// Constructor to load an <see cref="HSBColor" /> struct from hue, saturation,
-        /// brightness, and alpha values
+        /// brightness and alpha values
         /// </summary>
         /// <param name="h">The color hue value, ranging from 0 to 255</param>
         /// <param name="s">The color saturation (intensity) value, ranging from 0 (gray scale)
@@ -220,6 +220,54 @@ namespace Blade.MG.ColorManagement
                 hsbColor.H += 255;
 
             return hsbColor;
+        }
+
+        /// <summary>
+        /// Convert a HEX (#RRGGBB or #RRGGBBAA) Color to a HSB Color
+        /// The leading Hash is optional
+        /// </summary>
+        /// <param name="hexColor"></param>
+        /// <returns></returns>
+        public static HSBColor FromHexColor(string hexColor)
+        {
+            if (string.IsNullOrWhiteSpace(hexColor))
+            {
+                throw new ArgumentOutOfRangeException(nameof(hexColor));
+            }
+
+            byte[] parts;
+
+            if (hexColor.StartsWith("#"))
+            {
+                if (hexColor.Length == 7 || hexColor.Length == 9)
+                {
+                    parts = Convert.FromHexString(hexColor.Substring(1));
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(hexColor));
+                }
+            }
+            else
+            {
+                if (hexColor.Length == 6 || hexColor.Length == 8)
+                {
+                    parts = Convert.FromHexString(hexColor);
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(hexColor));
+                }
+            }
+
+            if (parts.Length == 3)
+            {
+                return new HSBColor(parts[0], parts[1], parts[2], (byte)255);
+            }
+            else
+            {
+                return new HSBColor(parts[0], parts[1], parts[2], parts[3]);
+            }
         }
 
     }

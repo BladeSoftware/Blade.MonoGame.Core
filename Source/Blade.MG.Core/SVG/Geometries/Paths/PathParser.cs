@@ -18,6 +18,7 @@ namespace Blade.MG.SVG.Geometries.Paths
         }
 
         // https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/path-markup-syntax
+        // https://www.w3.org/TR/SVG/paths
         public static List<PathCommand> ParsePath(string path)
         {
             List<PathCommand> pathCommands = new List<PathCommand>();
@@ -52,22 +53,20 @@ namespace Blade.MG.SVG.Geometries.Paths
 
                     pathCommands.Add(new PathMove { IsRelative = isRelative, StartPoint = vector });
 
-
-                    // Peek at the next token, if it's a point then treat it as a relative line command 'l'
-                    if (PeekNextToken(pathSpan, index, out token, out vector, out tokenType))
+                    // Subsequent pairs are treated as implicit lineto commands
+                    PathLine lineCommand = null;
+                    
+                    // Peek at the next token, if it's a point then add to the list
+                    while (TakeIfVectorToken(pathSpan, ref index, out token, out vector, out tokenType))
                     {
-                        if (tokenType != ParserTokenType.Command)
+                        if (lineCommand == null)
                         {
-                            // Handle line command
-                            command = isRelative ? 'l' : 'L';
-                            commandUpper = 'L';
-                            //isRelative = Same as Move Command;
+                            lineCommand = new PathLine { IsRelative = isRelative };
+                            pathCommands.Add(lineCommand);
                         }
-                    }
-                }
 
-                if (commandUpper == 'M')
-                {
+                        lineCommand.EndPoints.Add(vector);
+                    }
                 }
                 else if (commandUpper == 'L')
                 {
@@ -92,13 +91,27 @@ namespace Blade.MG.SVG.Geometries.Paths
                     RequireNumberToken(pathSpan, ref index, out token, out vector, out tokenType);
 
                     pathCommands.Add(new PathHLine { IsRelative = isRelative, EndPointX = vector.X });
+
+                    // Peek at the next token, if it's a point then add to the list
+                    while (TakeIfNumberToken(pathSpan, ref index, out token, out vector, out tokenType))
+                    {
+                        pathCommands.Add(new PathHLine { IsRelative = isRelative, EndPointX = vector.X });
+                    }
+
                 }
                 else if (commandUpper == 'V')
                 {
-                    // Verical Line <number>
+                    // Vertical Line <number>
                     RequireNumberToken(pathSpan, ref index, out token, out vector, out tokenType);
 
                     pathCommands.Add(new PathVLine { IsRelative = isRelative, EndPointY = vector.X });
+
+                    // Peek at the next token, if it's a point then add to the list
+                    while (TakeIfNumberToken(pathSpan, ref index, out token, out vector, out tokenType))
+                    {
+                        pathCommands.Add(new PathVLine { IsRelative = isRelative, EndPointY = vector.X });
+                    }
+
                 }
                 else if (commandUpper == 'C')
                 {
@@ -108,6 +121,17 @@ namespace Blade.MG.SVG.Geometries.Paths
                     RequireVectorToken(pathSpan, ref index, out token, out Vector2 endPoint, out tokenType);
 
                     pathCommands.Add(new PathBezierCubic(isRelative, controlPoint1, controlPoint2, endPoint));
+
+                    // Handle Polybezier
+                    while (TakeIfVectorToken(pathSpan, ref index, out token, out controlPoint1, out tokenType))
+                    {
+                        RequireVectorToken(pathSpan, ref index, out token, out controlPoint2, out tokenType);
+                        RequireVectorToken(pathSpan, ref index, out token, out endPoint, out tokenType);
+
+                        pathCommands.Add(new PathBezierCubic(isRelative, controlPoint1, controlPoint2, endPoint));
+                    }
+
+
                 }
                 else if (commandUpper == 'Q')
                 {
@@ -116,6 +140,15 @@ namespace Blade.MG.SVG.Geometries.Paths
                     RequireVectorToken(pathSpan, ref index, out token, out Vector2 endPoint, out tokenType);
 
                     pathCommands.Add(new PathBezierQuadratic(isRelative, controlPoint, endPoint));
+
+                    // Handle Polybezier
+                    while (TakeIfVectorToken(pathSpan, ref index, out token, out controlPoint, out tokenType))
+                    {
+                        RequireVectorToken(pathSpan, ref index, out token, out endPoint, out tokenType);
+
+                        pathCommands.Add(new PathBezierQuadratic(isRelative, controlPoint, endPoint));
+                    }
+
                 }
                 else if (commandUpper == 'S')
                 {
@@ -140,6 +173,7 @@ namespace Blade.MG.SVG.Geometries.Paths
                     bezier.EndPoint = endPoint;
 
                     pathCommands.Add(bezier);
+
                 }
                 else if (commandUpper == 'T')
                 {
@@ -159,6 +193,7 @@ namespace Blade.MG.SVG.Geometries.Paths
                     bezier.EndPoint = endPoint;
 
                     pathCommands.Add(bezier);
+
                 }
                 else if (commandUpper == 'A')
                 {
@@ -170,11 +205,23 @@ namespace Blade.MG.SVG.Geometries.Paths
                     RequireVectorToken(pathSpan, ref index, out token, out Vector2 endPoint, out tokenType);
 
                     pathCommands.Add(new PathEllipticArc { IsRelative = isRelative, Size = size, RotationAngle = rotationAngle.X, IsLargeArc = isLargeArcFlag.X >= 0.999f, SweepDirection = sweepDirectionFlag.X >= 0.999f, EndPoint = endPoint });
+
+                    while (TakeIfVectorToken(pathSpan, ref index, out token, out size, out tokenType))
+                    {
+                        RequireNumberToken(pathSpan, ref index, out token, out rotationAngle, out tokenType);
+                        RequireNumberToken(pathSpan, ref index, out token, out isLargeArcFlag, out tokenType);
+                        RequireNumberToken(pathSpan, ref index, out token, out sweepDirectionFlag, out tokenType);
+                        RequireVectorToken(pathSpan, ref index, out token, out endPoint, out tokenType);
+
+                        pathCommands.Add(new PathEllipticArc { IsRelative = isRelative, Size = size, RotationAngle = rotationAngle.X, IsLargeArc = isLargeArcFlag.X >= 0.999f, SweepDirection = sweepDirectionFlag.X >= 0.999f, EndPoint = endPoint });
+                    }
+
                 }
                 else if (commandUpper == 'Z')
                 {
                     // Close
                     pathCommands.Add(new PathClose { IsRelative = false });
+
                 }
                 else
                 {

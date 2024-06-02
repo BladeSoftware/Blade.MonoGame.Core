@@ -21,7 +21,7 @@ namespace Blade.MG.SVG.Geometries
      */
     public class SVGPath : SVGGeometry, ISVGPath
     {
-        public static int BezzierSegments = 32;  // Number of line segments to decompose Beziers into
+        public static int BezierSegments = 32;  // Number of line segments to decompose Beziers into
 
         public List<PathCommand> Commands = new List<PathCommand>();
 
@@ -61,7 +61,7 @@ namespace Blade.MG.SVG.Geometries
 
         public override LineSegments ToLineSegments()
         {
-            // TODO: Cach LineSegments
+            // TODO: Cache LineSegments
             return ToLineSegments(this);
         }
 
@@ -161,7 +161,7 @@ namespace Blade.MG.SVG.Geometries
                     }
 
 
-                    var points = Splines.CalcSpline(Splines.SplineType.Bezier_Cubic, BezzierSegments, controlPoints);
+                    var points = Splines.CalcSpline(Splines.SplineType.Bezier_Cubic, BezierSegments, controlPoints);
 
                     //Vector3 p1 = Vector3.Transform(point, matrix);
                     foreach (var endPoint in points)
@@ -208,7 +208,7 @@ namespace Blade.MG.SVG.Geometries
                         controlPoints.Add(quadraticBezier.EndPoint);
                     }
 
-                    var points = Splines.CalcSpline(Splines.SplineType.Bezier_Quadric, BezzierSegments, controlPoints);
+                    var points = Splines.CalcSpline(Splines.SplineType.Bezier_Quadric, BezierSegments, controlPoints);
 
                     //Vector3 p1 = Vector3.Transform(point, matrix);
                     foreach (var endPoint in points)
@@ -247,7 +247,7 @@ namespace Blade.MG.SVG.Geometries
                     controlPoints.Add(spline.EndPoint);
                     //}
 
-                    var points = Splines.CalcSpline(Splines.SplineType.Bezier_Cubic, BezzierSegments, controlPoints);
+                    var points = Splines.CalcSpline(Splines.SplineType.Bezier_Cubic, BezierSegments, controlPoints);
 
                     //Vector3 p1 = Vector3.Transform(point, matrix);
                     foreach (var endPoint in points)
