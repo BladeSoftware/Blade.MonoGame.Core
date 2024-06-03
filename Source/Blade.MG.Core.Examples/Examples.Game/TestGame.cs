@@ -78,6 +78,8 @@ namespace Examples
             // Example loading a texture using the content manager
             testTexture = this.Content.Load<Texture2D>("Images/spaceship1");
 
+            Tests();
+
         }
 
         /// <summary>
@@ -193,6 +195,20 @@ namespace Examples
                     spriteBatch.End();
                 }
             }
+
+        }
+
+        private void Tests()
+        {
+            Color color;
+
+            color = ColorHelper.FromHexColor("#010203");
+            color = ColorHelper.FromHexColor("#01020304");
+
+            color = ColorHelper.FromJsonColor("""{"R":1,"G":2,"B":3}""");
+            color = ColorHelper.FromJsonColor("""{"R":1,"G":2,"B":3,"A":4}""");
+            color = ColorHelper.FromJsonColor("""{"R":1 "G":2 "B":3}""");
+            color = ColorHelper.FromJsonColor("""{"R":1 "G":2 "B":3 "A":4}""");
 
         }
 
