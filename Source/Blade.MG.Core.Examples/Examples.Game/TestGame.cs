@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
+using System.Text;
 
 namespace Examples
 {
@@ -210,6 +211,12 @@ namespace Examples
             color = ColorHelper.FromJsonColor("""{"R":1 "G":2 "B":3}""");
             color = ColorHelper.FromJsonColor("""{"R":1 "G":2 "B":3 "A":4}""");
 
+            color = ColorHelper.FromString("""{"R":1 "G":2 "B":3 "A":4}""");
+
+            string s = ColorHelper.ToHexColor(color);
+            s = ColorHelper.ToJsonColor(color);
+
+            color = ColorHelper.FromString(s);
         }
 
     }

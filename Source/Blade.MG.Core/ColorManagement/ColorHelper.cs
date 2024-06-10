@@ -1,14 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Microsoft.Xna.Framework
 {
     public static class ColorHelper
     {
+        /// <summary>
+        /// Convert a Hex or Json Color string to a Monogame Color
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static Color FromString(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                // No color specified
+                return Color.Transparent;
+            }
+            else if (value.StartsWith('#'))
+            {
+                // Hex Color (Web Format)
+                return ColorHelper.FromHexColor(value);
+            }
+            else if (value.Contains('{'))
+            {
+                // {"R":0, "G":128, "B":0, "A":255} or {R:0 G:128 B:0 A:255}
+                return ColorHelper.FromJsonColor(value);
+
+            }
+
+            throw new ArgumentException($"Invalid Color value : {value}");
+        }
+
         /// <summary>
         /// Convert a HEX (#RRGGBB or #RRGGBBAA) Color to a Monogame Color
         /// The leading Hash is optional
@@ -142,5 +165,62 @@ namespace Microsoft.Xna.Framework
 
             return new Color(r, g, b, a);
         }
+
+        public static string ToHexColor(Color color)
+        {
+            var hexDigits = "0123456789ABCDEF";
+
+            Span<char> strColor = stackalloc char[9];
+
+            strColor[0] = '#';
+
+            // Red
+            int nibble1 = color.R & 0xF;
+            int nibble2 = color.R >> 4;
+
+            strColor[1] = hexDigits[nibble2];
+            strColor[2] = hexDigits[nibble1];
+
+            // Green
+            nibble1 = color.G & 0xF;
+            nibble2 = color.G >> 4;
+
+            strColor[3] = hexDigits[nibble2];
+            strColor[4] = hexDigits[nibble1];
+
+            // Blue
+            nibble1 = color.B & 0xF;
+            nibble2 = color.B >> 4;
+
+            strColor[5] = hexDigits[nibble2];
+            strColor[6] = hexDigits[nibble1];
+
+            // Alpha
+            nibble1 = color.A & 0xF;
+            nibble2 = color.A >> 4;
+
+            strColor[7] = hexDigits[nibble2];
+            strColor[8] = hexDigits[nibble1];
+
+            return strColor.ToString();
+        }
+
+        public static string ToJsonColor(Color color)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("{\"R\":");
+            sb.Append(color.R);
+            sb.Append(",\"G\":");
+            sb.Append(color.G);
+            sb.Append(",\"B\":");
+            sb.Append(color.B);
+            sb.Append(",\"A\":");
+            sb.Append(color.A);
+            sb.Append("}");
+
+            return sb.ToString();
+        }
+
     }
 }
