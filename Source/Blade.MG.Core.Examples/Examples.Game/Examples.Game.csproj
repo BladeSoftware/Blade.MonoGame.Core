@@ -14,13 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Blade.MG.Core">
-      <HintPath>..\..\Blade.MG.Core\bin\Debug\net8.0\Blade.MG.Core.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\Blade.MG.Core\Blade.MG.Core.csproj" />
   </ItemGroup>
 
 </Project>

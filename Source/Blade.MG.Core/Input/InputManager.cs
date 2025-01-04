@@ -1,72 +1,41 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+using XnaInput = Microsoft.Xna.Framework.Input;
+
 
 namespace Blade.MG.Input
 {
 
     public static class InputManager
     {
-        //public static InputManager Instance { get; } = new InputManager();
+        public static int MaxGamePads = 4;
 
-        public static KeyboardState KeyboardState;
-        public static KeyboardState LastKeyboardState;
+        public static KeyboardInput Keyboard = new KeyboardInput();
+        public static MouseInput Mouse = new MouseInput();
+        public static TouchInput Touch = new TouchInput();
 
-        public static MouseState MouseState;
-        public static MouseState LastMouseState;
 
-        public static GamePadState GamePadStatePlayer1;
-        public static GamePadState LastGamePadStatePlayer1;
-
-        public static GamePadState GamePadStatePlayer2;
-        public static GamePadState LastGamePadStatePlayer2;
-
-        //private InputManager()
-        //{
-
-        //}
+        private static GamePadInput[] gamePad = new GamePadInput[] { new GamePadInput(PlayerIndex.One), new GamePadInput(PlayerIndex.Two), new GamePadInput(PlayerIndex.Three), new GamePadInput(PlayerIndex.Four) };
+        public static GamePadInput GamePad(int playerIndex) => gamePad[playerIndex];
+        public static GamePadInput GamePad(PlayerIndex playerIndex) => gamePad[(int)playerIndex];
 
         public static void Update()
         {
             // Handle Keyboard Input
-            LastKeyboardState = KeyboardState;
-            KeyboardState = Keyboard.GetState();
+            Keyboard.UpdateState(XnaInput.Keyboard.GetState());
 
             // Handle Mouse Input
-            LastMouseState = MouseState;
-            MouseState = Mouse.GetState();
+            Mouse.UpdateState(XnaInput.Mouse.GetState());
 
-            // Handle Game Pad input
-            LastGamePadStatePlayer1 = GamePadStatePlayer1;
-            GamePadStatePlayer1 = GamePad.GetState(PlayerIndex.One);
+            // Handle GamePad Input
+            GamePad(0).UpdateState(XnaInput.GamePad.GetState(PlayerIndex.One));
+            GamePad(1).UpdateState(XnaInput.GamePad.GetState(PlayerIndex.Two));
+            GamePad(2).UpdateState(XnaInput.GamePad.GetState(PlayerIndex.Three));
+            GamePad(3).UpdateState(XnaInput.GamePad.GetState(PlayerIndex.Four));
 
-            LastGamePadStatePlayer2 = GamePadStatePlayer2;
-            GamePadStatePlayer2 = GamePad.GetState(PlayerIndex.Two);
-        }
-
-
-        // Returns true if they key was pressed 
-        public static bool KeyPressed(Keys key)
-        {
-            return (InputManager.LastKeyboardState.IsKeyUp(key) && InputManager.KeyboardState.IsKeyDown(key));
-        }
-
-        // Returns true if they key was released
-        public static bool KeyReleased(Keys key)
-        {
-            return (InputManager.LastKeyboardState.IsKeyDown(key) && InputManager.KeyboardState.IsKeyUp(key));
-        }
-
-        // Returns true if they key is down
-        public static bool IsKeyDown(Keys key)
-        {
-            return InputManager.KeyboardState.IsKeyDown(key);
-        }
-
-        // Returns true if they key is up
-        public static bool IsKeyUp(Keys key)
-        {
-            return InputManager.KeyboardState.IsKeyUp(key);
+            // Handle Touch Input
+            Touch.UpdateState();
         }
 
     }
 }
+
