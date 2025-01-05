@@ -32,5 +32,32 @@ namespace Examples.Android
             _game.Run();
 
         }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+
+            // When we resume (which also seems to happen on startup), hide the system UI to go to full screen mode.
+            HideSystemUI();
+        }
+
+
+        private void HideSystemUI()
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
+            {
+                View decorView = Window.DecorView;
+                if (Build.VERSION.SdkInt >= BuildVersionCodes.R)
+                {
+                    decorView.WindowInsetsController?.SetSystemBarsAppearance((int)SystemUiFlags.Immersive, (int)SystemUiFlags.Immersive);
+                }
+                else
+                {
+                    decorView.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.Immersive | SystemUiFlags.Fullscreen | SystemUiFlags.HideNavigation | SystemUiFlags.ImmersiveSticky);
+                }
+                this.Immersive = true;
+            }
+        }
+
     }
 }
