@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0-android</TargetFramework>
+    <TargetFramework>net10.0-android</TargetFramework>
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <OutputType>Exe</OutputType>
     <ApplicationId>com.companyname.Examples.Android</ApplicationId>
@@ -11,8 +11,8 @@
     <Content Include=".config\dotnet-tools.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.4.1" />
+    <PackageReference Include="MonoGame.Framework.Android" Version="3.8.4.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Examples.Game\Examples.Game.csproj" />
