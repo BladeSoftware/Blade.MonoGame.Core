@@ -16,7 +16,7 @@ namespace Blade.MG.Input
 
         public GamePadInput(PlayerIndex playerIndex)
         {
-            this.PlayerIndex = PlayerIndex;
+            this.PlayerIndex = playerIndex;
 
             DPad = new GamePadDPad(this);
         }

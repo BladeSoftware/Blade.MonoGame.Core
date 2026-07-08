@@ -13,7 +13,7 @@ namespace Blade.MG.Input
         public TouchInput()
         {
             // Only enable a few gestures by default. User can opt into others
-            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.Hold | GestureType.HorizontalDrag | GestureType.VerticalDrag;
+            TouchPanel.EnabledGestures = GestureType.Tap | GestureType.DoubleTap | GestureType.Hold | GestureType.HorizontalDrag | GestureType.VerticalDrag;
             TouchPanel.EnableMouseGestures = false;
             TouchPanel.EnableMouseTouchPoint = false;
 
